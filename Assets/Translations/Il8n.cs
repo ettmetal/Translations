@@ -26,7 +26,17 @@ namespace Ettmetal.Translation {
         // Core internationalisation interface.
         public static string __(string key) {
             string translation = activeLocale[key].Value;
-            return string.IsNullOrEmpty(translation) ? defaultLocale[key].Value : translation;
+
+            if(string.IsNullOrEmpty(translation)) {
+                Debug.LogFormat(Strings.FallbackToDefaultFormat, activeLocale.Name, key);
+                translation = defaultLocale[key].Value;
+            }
+
+            if(string.IsNullOrEmpty(translation)) {
+                Debug.LogWarningFormat(Strings.NoDefaultValueFormat, defaultLocale.Name, key);
+            }
+
+            return translation;
         }
 
         public static void ChangeLocale(string newLocale) {
