@@ -39,6 +39,18 @@ namespace Ettmetal.Translation {
             return translation;
         }
 
+        public static string __(string key, int count) {
+            string translation = activeLocale[key].Pluralised(count);
+            if(string.IsNullOrEmpty(translation)) {
+                Debug.LogFormat(Strings.FallbackToDefaultFormat, activeLocale.Name, key);
+                translation = defaultLocale[key].Pluralised(count);
+            }
+            if(string.IsNullOrEmpty(translation)) {
+                Debug.LogWarningFormat(Strings.NoDefaultValueFormat, defaultLocale.Name, key);
+            }
+            return translation;
+        }
+
         public static void ChangeLocale(string newLocale) {
             if(PlayerPrefs.GetString(Strings.LocalePref) != newLocale) {
                 setLocale(newLocale);
