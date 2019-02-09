@@ -6,7 +6,7 @@ namespace Ettmetal.Translation {
     [RequireComponent(typeof(Text))]
     public class TextTranslator : MonoBehaviour {
         [SerializeField]
-        private string key;
+        private string key = null;
         private Text text;
 
         void Start() {

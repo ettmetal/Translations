@@ -5,12 +5,12 @@ namespace Ettmetal.Translation {
     // with a string key.
     public class LocaleData : ScriptableObject {
         [SerializeField]
-        private string localeName;
+        private string localeName = "";
         public string Name { get{return localeName;} }
         [SerializeField]
-        private string localeCode;
+        private string localeCode = "";
         [SerializeField]
-        private LocalisedItem[] items;
+        private LocalisedItem[] items = null;
         
         public LocalisedItem this[string key] {
             get {

@@ -6,13 +6,13 @@ namespace Ettmetal.Translation {
     // Represents a localised string
     public class LocalisedItem {
         [SerializeField]
-        private string key;
+        private string key = "";
         public string Key{ get{return key;} }
         [SerializeField]
-        private string value;
+        private string value = "";
         public string Value{ get{return value;} }
         [SerializeField]
-        private PluralForm[] plurals;
+        private PluralForm[] plurals = null;
 
         public string Pluralised(int count) {
             if(plurals.Length < 1) {
@@ -32,11 +32,11 @@ namespace Ettmetal.Translation {
         [Serializable]
         private class PluralForm {
             [SerializeField]
-            private int start;
+            private int start = 0;
             [SerializeField]
-            private int end;
+            private int end = int.MaxValue;
             [SerializeField]
-            private string value;
+            private string value = "";
             public string Value{ get{return value;} }
 
             public bool ApplicableTo(int count) {

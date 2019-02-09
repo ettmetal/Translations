@@ -3,6 +3,7 @@
     internal static class Strings {
         public static readonly string LocalePref = "Ettmetal.Translation.Locale";
         public static readonly string SettingsPath = "Translations-Settings";
+        public static readonly string DefaultLocalePath = "Translations/Locales/";
         public static readonly string FallbackToDefaultFormat = "No value found in locale {0} for {1}, falling back to default locale.";
         public static readonly string NoDefaultValueFormat = "The default locale {0} contains no default value for {1}.";
         public static readonly string NoPluralFormat = "";
