@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47c6a2e5c0cd9064ba32827a194c001b, type: 3}
-  m_Name: Translation Settings
+  m_Name: Translations Settings
   m_EditorClassIdentifier: 
   defaultLocale: 
-  localesPath: 
+  localesPath: Locales/
