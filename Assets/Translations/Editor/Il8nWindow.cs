@@ -8,9 +8,9 @@ namespace Ettmetal.Translation.Editor {
     public class Il8nWindow : EditorWindow {
         private static Il8nWindow window;
         private static TranslationSettings settings;
+        [SerializeField]
         private SerializedObject serializedLocales;
         private Vector2 scrollPosition;
-        private int keyCount;
         private ReorderableList list;
         private string newLocaleName;
     
@@ -26,14 +26,14 @@ namespace Ettmetal.Translation.Editor {
         private void init() {
             LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesPath);
             serializedLocales = locales != null && locales.Length > 0 ? new SerializedObject(locales) : null;
-            keyCount = serializedLocales != null ? serializedLocales.FindProperty("items").arraySize : 0;
         }
 
         private void OnGUI() {
+            serializedLocales.Update();
             EditorGUITools.DoHorizontal(addOrRemoveLocale);
             EditorGUITools.DoVertical(() => {
                 if(serializedLocales != null && serializedLocales.targetObject != null) {
-                    if(keyCount > 0){
+                    if(serializedLocales.FindProperty("items").arraySize > 0){
                         scrollPosition = EditorGUITools.DoScroll(drawGrid, scrollPosition);
                     }
                     else{
@@ -54,9 +54,10 @@ namespace Ettmetal.Translation.Editor {
         }
 
         private void keyColumn() {
+            int strings = serializedLocales.FindProperty("items").arraySize;
             EditorGUITools.DoVertical(() => {
                 EditorGUILayout.LabelField(new GUIContent("String name", "The name used to identify this translation"));
-                for(int keyIndex = 0; keyIndex < keyCount; keyIndex++){
+                for(int keyIndex = 0; keyIndex < strings; keyIndex++){
                     var keyProp = serializedLocales.FindProperty("items").GetArrayElementAtIndex(keyIndex).FindPropertyRelative("key");
                     EditorGUILayout.PropertyField(keyProp);
                 }
@@ -64,9 +65,10 @@ namespace Ettmetal.Translation.Editor {
         }
 
         private void localeColumn(SerializedObject locale) {
+            int strings = serializedLocales.FindProperty("items").arraySize;
             EditorGUITools.DoVertical(() => {
                 EditorGUILayout.LabelField(locale.targetObject.name);
-                for(int keyIndex = 0; keyIndex < keyCount; keyIndex++){
+                for(int keyIndex = 0; keyIndex < strings; keyIndex++){
                     var localisationProp = locale.FindProperty("items").GetArrayElementAtIndex(keyIndex).FindPropertyRelative("value");
                     EditorGUILayout.PropertyField(localisationProp);
                 }
