@@ -15,7 +15,7 @@ namespace Ettmetal.Translation.Editor {
         [MenuItem("Window/Translations")]
         private static void ShowWindow() {
             window = GetWindow<Il8nWindow>();
-            window.titleContent = new GUIContent("Il8n");
+            window.titleContent = new GUIContent("Translations");
             window.init();
             window.Show();
         }
@@ -39,8 +39,8 @@ namespace Ettmetal.Translation.Editor {
                         scrollPosition = EditorGUITools.DoScroll(drawGrid, scrollPosition);
                     }
                     else{
-                    EditorGUILayout.LabelField("No strings to edit");
-                }
+                        EditorGUILayout.LabelField("No strings to edit");
+                    }
                 }
                 EditorGUITools.DoHorizontal(addOrRemoveItem);
             });
