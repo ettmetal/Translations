@@ -64,6 +64,7 @@ namespace Ettmetal.Translation.Editor {
                     EditorGUILayout.PropertyField(keyProp);
                 }
             });
+            serializedLocales.ApplyModifiedProperties();
         }
 
         private void localeColumn(SerializedObject locale) {
