@@ -82,7 +82,7 @@ namespace Ettmetal.Translation.Editor {
         private void addOrRemoveLocale(){
             newLocaleName = EditorGUILayout.TextField(new GUIContent("Name"), newLocaleName);
             if(GUILayout.Button("+")){
-                AssetCreator.Create<LocaleData>(newLocaleName, "Assets/Resources/Locales/");
+                AssetCreator.Create<LocaleData>(newLocaleName, settings.LocalesPath);
                 newLocaleName = string.Empty;
             }
             // TODO: Remove Button
