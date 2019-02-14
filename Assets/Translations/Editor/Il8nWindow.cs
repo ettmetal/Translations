@@ -3,7 +3,6 @@ using UnityEditor;
 using UnityEditorInternal;
 using Ettmetal.UnityHelpers;
 
-
 namespace Ettmetal.Translation.Editor {    
     public class Il8nWindow : EditorWindow {
         private static Il8nWindow window;
@@ -11,19 +10,22 @@ namespace Ettmetal.Translation.Editor {
         [SerializeField]
         private SerializedObject serializedLocales;
         private Vector2 scrollPosition;
-        private ReorderableList list;
         private string newLocaleName;
     
         [MenuItem("Window/Translations")]
         private static void ShowWindow() {
-            settings = settings == null ? Resources.Load<TranslationSettings>(Strings.SettingsPath) : settings;
             window = GetWindow<Il8nWindow>();
             window.titleContent = new GUIContent("Il8n");
             window.init();
             window.Show();
         }
 
+        private void Awake() {
+            init();
+        }
+
         private void init() {
+            settings = settings == null ? Resources.Load<TranslationSettings>(Strings.SettingsPath) : settings;
             LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesPath);
             serializedLocales = locales != null && locales.Length > 0 ? new SerializedObject(locales) : null;
         }
