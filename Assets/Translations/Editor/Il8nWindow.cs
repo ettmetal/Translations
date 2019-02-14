@@ -70,7 +70,11 @@ namespace Ettmetal.Translation.Editor {
         private void localeColumn(SerializedObject locale) {
             int strings = serializedLocales.FindProperty("items").arraySize;
             EditorGUITools.DoVertical(() => {
-                EditorGUILayout.LabelField(locale.targetObject.name);
+                string label = locale.targetObject.name;
+                if(settings.DefaultLocale == locale.targetObject.name){
+                    label += " (Default)";
+                }
+                EditorGUILayout.LabelField(label);
                 for(int keyIndex = 0; keyIndex < strings; keyIndex++){
                     var localisationProp = locale.FindProperty("items").GetArrayElementAtIndex(keyIndex).FindPropertyRelative("value");
                     EditorGUILayout.PropertyField(localisationProp);
