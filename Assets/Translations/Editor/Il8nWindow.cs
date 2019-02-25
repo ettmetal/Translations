@@ -25,25 +25,23 @@ namespace Ettmetal.Translation.Editor {
         }
 
         private void init() {
-            settings = settings == null ? Resources.Load<TranslationSettings>(Strings.SettingsPath) : settings;
+            settings = settings == null ? Resources.Load<TranslationSettings>(Translation.Strings.SettingsPath) : settings;
             LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesPath);
             serializedLocales = locales != null && locales.Length > 0 ? new SerializedObject(locales) : null;
         }
 
         private void OnGUI() {
-            serializedLocales.Update();
             EditorGUITools.DoHorizontal(addOrRemoveLocale);
-            EditorGUITools.DoVertical(() => {
-                if(serializedLocales != null && serializedLocales.targetObject != null) {
-                    if(serializedLocales.FindProperty("items").arraySize > 0){
-                        scrollPosition = EditorGUITools.DoScroll(drawGrid, scrollPosition);
-                    }
-                    else{
-                        EditorGUILayout.LabelField("No strings to edit");
-                    }
+            if(serializedLocales != null && serializedLocales.targetObject != null){
+                serializedLocales.Update();
+                if(serializedLocales.FindProperty("items").arraySize > 0){
+                    scrollPosition = EditorGUITools.DoScroll(drawGrid, scrollPosition);
+                }
+                else{
+                    EditorGUILayout.LabelField(Strings.NoStrings);
                 }
                 EditorGUITools.DoHorizontal(addOrRemoveItem);
-            });
+            }
         }
 
         private void drawGrid(){
