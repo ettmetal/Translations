@@ -12,7 +12,7 @@ namespace Ettmetal.Translation.Editor {
 		private bool fancyEdit = true;
 
 		public override void OnInspectorGUI() {
-            settings = settings == null ? Resources.Load<TranslationSettings>(Strings.SettingsPath) : settings;
+            settings = settings == null ? Resources.Load<TranslationSettings>(Translation.Strings.SettingsPath) : settings;
 			SerializedProperty translationKeyProp = serializedObject.FindProperty("key");
 			fancyEdit = GUILayout.Toggle(fancyEdit, new GUIContent("Select from dropdown", "When enabled, translations can be selected from those available."));
 			if(fancyEdit) {
