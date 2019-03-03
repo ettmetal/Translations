@@ -25,7 +25,7 @@ If applicable, add screenshots to help explain your problem.
 
 **Desktop (please complete the following information):**
  - OS: [e.g. Windows 10]
- - Unity Version: [e.g. chrome, safari]
+ - Unity Version: [e.g. 2018.3.4f1]
  - Translations Version: [e.g. 0.1.0-alpha]
 
 **Additional comments**
