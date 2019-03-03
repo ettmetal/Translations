@@ -24,8 +24,7 @@ You don't need code for the basic functionality of translations to work.
 >2. Add locales
 >3. Setup strings & translations in editor
 >4. Add TextTranslator component to your UI Texts (Or add a LocalizedText component)
->5. Select target string
->6. Profit?
+>5. Select target string. Does not currently update at edit time.
 
 If you want to do custom stuff, there's an API for that!
 
