@@ -100,10 +100,6 @@ namespace Ettmetal.Translation.Editor {
                 }
                 newLocaleName = string.Empty;
             }
-            // TODO: Remove Button
-            // if(GUILayout.Button("-")){
-
-            // }
         }
 
         private void addOrRemoveItem() {
