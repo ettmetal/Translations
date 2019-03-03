@@ -8,6 +8,8 @@ Localise UI text 📄 (and more) in your Unity games.
 
 🚧 __Translations is still under construction.__ *There is __no stable version__ yet* 🚧
 
+__Current Version:__ [0.1.0-alpha](releases/tag/v0.1.0-alpha)
+
 ✨[Feature Wishlist](/wiki/Wishlist)✨
 
 [Text]: https://docs.unity3d.com/Manual/script-Text.html
