@@ -16,15 +16,14 @@ namespace Ettmetal.Translation.Editor {
         private static void ShowWindow() {
             window = GetWindow<Il8nWindow>();
             window.titleContent = new GUIContent("Translations");
-            window.init();
             window.Show();
         }
 
-        private void Awake() {
+        private void OnEnable() {
             init();
         }
 
-        private void init() {
+        private void init() { // Get settings and current locale data
             settings = settings == null ? Resources.Load<TranslationSettings>(Translation.Strings.SettingsPath) : settings;
             LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesResourcePath);
             serializedLocales = locales != null && locales.Length > 0 ? new SerializedObject(locales) : null;
@@ -99,6 +98,8 @@ namespace Ettmetal.Translation.Editor {
                     newLocaleSerialized.ApplyModifiedProperties();
                 }
                 newLocaleName = string.Empty;
+                // OnProjectChanged gets called as soon as the asset is created, so this has to be here instead.
+                init();
             }
         }
 
