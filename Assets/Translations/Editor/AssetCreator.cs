@@ -30,7 +30,9 @@ namespace Ettmetal.UnityHelpers {
         private static void createPath(string parent, string path) {
             string remainingPath = path.Replace(parent, "");
             string[] splitPath = remainingPath.Split('/');
-            AssetDatabase.CreateFolder(parent.TrimEnd('/'), splitPath[0]);
+            if(!AssetDatabase.IsValidFolder(parent + splitPath[0])) {
+				AssetDatabase.CreateFolder(parent.TrimEnd('/'), splitPath[0]);
+			}
             string newParent = parent + splitPath[0] + "/";
             if(newParent != path) {
                 createPath(newParent, path);
