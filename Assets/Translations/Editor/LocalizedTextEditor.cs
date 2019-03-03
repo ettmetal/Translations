@@ -47,7 +47,7 @@ namespace Ettmetal.Translation.Editor {
 
         // Gets possible localisation strings from locale files
         private string[] getPossibleKeys() {
-            LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesPath);
+            LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesResourcePath);
             string[] keys = null;
             if(locales?.Length > 0) {
                 SerializedObject firstLocale = new SerializedObject(locales[0]);

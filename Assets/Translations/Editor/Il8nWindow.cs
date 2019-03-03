@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using Ettmetal.UnityHelpers;
 
-namespace Ettmetal.Translation.Editor {    
+namespace Ettmetal.Translation.Editor {
     public class Il8nWindow : EditorWindow {
         private static Il8nWindow window;
         private static TranslationSettings settings;
@@ -11,7 +11,7 @@ namespace Ettmetal.Translation.Editor {
         private SerializedObject serializedLocales;
         private Vector2 scrollPosition;
         private string newLocaleName;
-    
+
         [MenuItem("Window/Translations")]
         private static void ShowWindow() {
             window = GetWindow<Il8nWindow>();
@@ -26,25 +26,25 @@ namespace Ettmetal.Translation.Editor {
 
         private void init() {
             settings = settings == null ? Resources.Load<TranslationSettings>(Translation.Strings.SettingsPath) : settings;
-            LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesPath);
+            LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesResourcePath);
             serializedLocales = locales != null && locales.Length > 0 ? new SerializedObject(locales) : null;
         }
 
         private void OnGUI() {
             EditorGUITools.DoHorizontal(addOrRemoveLocale);
-            if(serializedLocales != null && serializedLocales.targetObject != null){
+            if(serializedLocales != null && serializedLocales.targetObject != null) {
                 serializedLocales.Update();
-                if(serializedLocales.FindProperty("items").arraySize > 0){
+                if(serializedLocales.FindProperty("items").arraySize > 0) {
                     scrollPosition = EditorGUITools.DoScroll(drawGrid, scrollPosition);
                 }
-                else{
+                else {
                     EditorGUILayout.LabelField(Strings.NoStrings);
                 }
                 EditorGUITools.DoHorizontal(addOrRemoveItem);
             }
         }
 
-        private void drawGrid(){
+        private void drawGrid() {
             EditorGUITools.DoHorizontal(() => {
                 keyColumn();
                 foreach(var locale in serializedLocales.targetObjects) {
@@ -57,7 +57,7 @@ namespace Ettmetal.Translation.Editor {
             int strings = serializedLocales.FindProperty("items").arraySize;
             EditorGUITools.DoVertical(() => {
                 EditorGUILayout.LabelField(new GUIContent("String name", "The name used to identify this translation"));
-                for(int keyIndex = 0; keyIndex < strings; keyIndex++){
+                for(int keyIndex = 0; keyIndex < strings; keyIndex++) {
                     var keyProp = serializedLocales.FindProperty("items").GetArrayElementAtIndex(keyIndex).FindPropertyRelative("key");
                     EditorGUILayout.PropertyField(keyProp);
                 }
@@ -69,11 +69,11 @@ namespace Ettmetal.Translation.Editor {
             int strings = serializedLocales.FindProperty("items").arraySize;
             EditorGUITools.DoVertical(() => {
                 string label = locale.targetObject.name;
-                if(settings.DefaultLocale == locale.targetObject.name){
+                if(settings.DefaultLocale == locale.targetObject.name) {
                     label += " (Default)";
                 }
                 EditorGUILayout.LabelField(label);
-                for(int keyIndex = 0; keyIndex < strings; keyIndex++){
+                for(int keyIndex = 0; keyIndex < strings; keyIndex++) {
                     var localisationProp = locale.FindProperty("items").GetArrayElementAtIndex(keyIndex).FindPropertyRelative("value");
                     EditorGUILayout.PropertyField(localisationProp);
                 }
@@ -81,24 +81,24 @@ namespace Ettmetal.Translation.Editor {
             locale.ApplyModifiedProperties();
         }
 
-        private void addOrRemoveLocale(){
+        private void addOrRemoveLocale() {
             newLocaleName = EditorGUILayout.TextField(new GUIContent("Name"), newLocaleName);
-            if(GUILayout.Button("+")){
-                AssetCreator.Create<LocaleData>(newLocaleName, settings.LocalesPath);
+            if(GUILayout.Button("+")) {
+                AssetCreator.Create<LocaleData>(newLocaleName, Strings.ResourcesRoot + settings.LocalesPath);
                 newLocaleName = string.Empty;
             }
             // TODO: Remove Button
             // if(GUILayout.Button("-")){
-                
+
             // }
         }
 
-        private void addOrRemoveItem(){
-            if(GUILayout.Button("+")){
+        private void addOrRemoveItem() {
+            if(GUILayout.Button("+")) {
                 serializedLocales.FindProperty("items").arraySize++;
                 serializedLocales.ApplyModifiedProperties();
             }
-            if(serializedLocales.FindProperty("items").arraySize > 0 && GUILayout.Button("Remove Last Sring")){
+            if(serializedLocales.FindProperty("items").arraySize > 0 && GUILayout.Button("Remove Last Sring")) {
                 serializedLocales.FindProperty("items").arraySize--;
                 serializedLocales.ApplyModifiedProperties();
             }

@@ -11,7 +11,7 @@ namespace Ettmetal.Translation {
 
         static Il8n() {
             settings = Resources.Load<TranslationSettings>(Strings.SettingsPath);
-            if(!PlayerPrefs.HasKey(Strings.LocalePref)){
+            if(!PlayerPrefs.HasKey(Strings.LocalePref)) {
                 setLocale(settings.DefaultLocale);
             }
             defaultLocale = loadLocale(settings.DefaultLocale);
@@ -65,7 +65,7 @@ namespace Ettmetal.Translation {
         }
 
         private static LocaleData loadLocale(string locale) {
-            return Resources.Load<LocaleData>(string.Format(settings.LocalesPath, locale));
+            return Resources.Load<LocaleData>(string.Format(settings.LocalesResourcePath, locale));
         }
     }
 }
