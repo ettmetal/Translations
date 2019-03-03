@@ -84,7 +84,20 @@ namespace Ettmetal.Translation.Editor {
         private void addOrRemoveLocale() {
             newLocaleName = EditorGUILayout.TextField(new GUIContent("Name"), newLocaleName);
             if(GUILayout.Button("+")) {
-                AssetCreator.Create<LocaleData>(newLocaleName, Strings.ResourcesRoot + settings.LocalesPath);
+                LocaleData newLocale = AssetCreator.Create<LocaleData>(newLocaleName, Strings.ResourcesRoot + settings.LocalesPath);
+                SerializedProperty localizedItems = serializedLocales?.FindProperty("items");
+                if(localizedItems?.arraySize > 0) {
+                    SerializedObject newLocaleSerialized = new SerializedObject(newLocale);
+                    SerializedProperty newLocaleItems = newLocaleSerialized.FindProperty("items");
+                    do {
+                        newLocaleItems.arraySize++;
+                        int index = newLocaleItems.arraySize - 1;
+                        SerializedProperty currentKey = newLocaleItems.GetArrayElementAtIndex(index).FindPropertyRelative("key");
+                        string currentKeyValue = localizedItems.GetArrayElementAtIndex(index).FindPropertyRelative("key").stringValue;
+                        currentKey.stringValue = currentKeyValue;
+                    } while(newLocaleItems.arraySize != localizedItems.arraySize);
+                    newLocaleSerialized.ApplyModifiedProperties();
+                }
                 newLocaleName = string.Empty;
             }
             // TODO: Remove Button
