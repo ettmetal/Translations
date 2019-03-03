@@ -38,9 +38,7 @@ Il8n.ChangeLocale("iso-locale-code"); // Changes the active locale to "iso-local
 ```
 Translations will manage storing and retrieving the current selected locale (using `PlayerPrefs`) automagically 🔮.
 
-> ⏳🌌*The following refers to the __future__ of Translations.*
-
-> *Full details can be found at the [API Wiki](/wiki/API).*
+Full details can be found at the [API Wiki](/wiki/API).
 
 ## Installing
 For now, cloning the repository will clone a full Unity project. That's fine if you want to work on Translations itself, but you'll need to copy the full contents of the `Assets/Translations` folder into your own project's `Assets` folder if you want to use it.
