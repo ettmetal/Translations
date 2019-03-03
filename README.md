@@ -45,11 +45,7 @@ Full details can be found at the [API Wiki](/wiki/API).
 ## Installing
 For now, cloning the repository will clone a full Unity project. That's fine if you want to work on Translations itself, but you'll need to copy the full contents of the `Assets/Translations` folder into your own project's `Assets` folder if you want to use it.
 
-> ⏳🌌*These steps refer to the __future__ of Translations.  
-Best-case scenario following the below is __nothing happens__.
-Better to be safe and wait for it to be released, though.*
-
-> *Head over to [Releases](/releases) and download the most recent version appropriate for your Unity version. Import the package into your Unity project.*
+Head over to [Releases](/releases) and download the most recent version appropriate for your Unity version. Import the package into your Unity project.
 
 ## Contributing
 Found a bug 🐛?
