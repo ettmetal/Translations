@@ -7,17 +7,17 @@ namespace Ettmetal.Translation {
         [SerializeField]
         private string localizationKey;
 
-        protected void Awake() {
+        protected override void Awake() {
             base.Awake();
             updateLocalizedText();
         }
 
-        protected void OnEnable() {
+        protected override void OnEnable() {
             base.OnEnable();
             Il8n.OnLocaleChanged += updateLocalizedText;
         }
 
-        protected void OnDisable() {
+        protected override void OnDisable() {
             base.OnDisable();
             Il8n.OnLocaleChanged -= updateLocalizedText;
         }
