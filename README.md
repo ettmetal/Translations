@@ -23,7 +23,7 @@ You don't need code for the basic functionality of translations to work.
 >1. Windows/Translations
 >2. Add locales
 >3. Setup strings & translations in editor
->4. Add TexTranslator component to your UI Texts
+>4. Add TextTranslator component to your UI Texts (Or add a LocalizedText component)
 >5. Select target string
 >6. Profit?
 
