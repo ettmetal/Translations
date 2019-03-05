@@ -8,5 +8,6 @@
         public static readonly string NoDefaultValueFormat = "The default locale {0} contains no default value for {1}.";
         public static readonly string NoPluralFormat = "";
         public static readonly string NoPluralException = "The queried item does not contain pluralisations.";
+		public static readonly string LocaleNotFoundFormat = "The requested locale ({0}) could not be found in the Locales folder.";
     }  
 }
