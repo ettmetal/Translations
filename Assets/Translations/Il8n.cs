@@ -54,7 +54,7 @@ namespace Ettmetal.Translation {
         public static void ChangeLocale(string newLocale) {
             if(PlayerPrefs.GetString(Strings.LocalePref) != newLocale) {
                 setLocale(newLocale);
-                loadLocale(newLocale);
+                activeLocale = loadLocale(newLocale);
                 OnLocaleChanged();
             }
         }
