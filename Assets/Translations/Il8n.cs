@@ -54,7 +54,7 @@ namespace Ettmetal.Translation {
         public static void ChangeLocale(string newLocale) {
             if(PlayerPrefs.GetString(Strings.LocalePref) != newLocale) {
                 setLocale(newLocale);
-                loadLocale(newLocale);
+                activeLocale = loadLocale(newLocale);
                 OnLocaleChanged();
             }
         }
@@ -65,7 +65,11 @@ namespace Ettmetal.Translation {
         }
 
         private static LocaleData loadLocale(string locale) {
-            return Resources.Load<LocaleData>(string.Format(settings.LocalesResourcePath, locale));
+			LocaleData loadedLocale = Resources.Load<LocaleData>(string.Format(settings.LocalesResourcePath, locale));
+			if(loadedLocale == null) {
+				throw new ArgumentOutOfRangeException(string.Format(Strings.LocaleNotFoundFormat, locale));
+			}
+			return loadedLocale;
         }
     }
 }
