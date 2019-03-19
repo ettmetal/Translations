@@ -1,21 +1,25 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEditor;
+using UnityEditor.UI;
 
 namespace Ettmetal.Translation.Editor {
-    [CustomEditor(typeof(LocalizedText))]
+    [CustomEditor(typeof(LocalizedText), true)]
     [CanEditMultipleObjects]
-    public class LocalizedTextEditor : UnityEditor.UI.TextEditor {
+    public class LocalizedTextEditor : GraphicEditor {
         private static TranslationSettings settings;
 
         private SerializedProperty localizedKeyProp;
+        private SerializedProperty fontData;
 
         private bool useFancyEdit = true;
 
         protected override void OnEnable() {
             base.OnEnable();
             localizedKeyProp = serializedObject.FindProperty("localizationKey");
+            fontData = serializedObject.FindProperty("m_FontData");
         }
 
         public override void OnInspectorGUI() {
@@ -23,8 +27,11 @@ namespace Ettmetal.Translation.Editor {
             serializedObject.Update();
             if(useFancyEdit) { fancyEdit(); }
             else { EditorGUILayout.PropertyField(localizedKeyProp); }
+            EditorGUILayout.PropertyField(fontData);
+            AppearanceControlsGUI();
+            RaycastControlsGUI();
             serializedObject.ApplyModifiedProperties();
-            base.OnInspectorGUI();
+            //base.OnInspectorGUI();
         }
 
         private void fancyEdit() {
@@ -32,13 +39,10 @@ namespace Ettmetal.Translation.Editor {
             if(keys?.Length > 0) {
                 string currentValue = localizedKeyProp.stringValue;
                 int currentIndex = Array.IndexOf(keys, currentValue);
-                if(currentIndex > -1 || currentValue == "") {
-                    int selectedKey = EditorGUILayout.Popup(currentIndex, keys);
-                    localizedKeyProp.stringValue = keys[selectedKey];
-                }
-                else {
-                    EditorGUILayout.LabelField(Strings.SelectedKeyNotFound);
-                }
+				currentIndex = currentIndex == -1 ? 0 : currentIndex;
+				int selectedKey = EditorGUILayout.Popup(currentIndex, keys);
+				localizedKeyProp.stringValue = keys[selectedKey];
+
             }
             else {
                 EditorGUILayout.LabelField(Strings.NoKeys);
