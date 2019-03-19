@@ -65,7 +65,7 @@ namespace Ettmetal.Translation {
         }
 
         private static LocaleData loadLocale(string locale) {
-			LocaleData loadedLocale = Resources.Load<LocaleData>(string.Format(settings.LocalesResourcePath, locale));
+			LocaleData loadedLocale = Resources.Load<LocaleData>(settings.LocalesResourcePath + locale);
 			if(loadedLocale == null) {
 				throw new ArgumentOutOfRangeException(string.Format(Strings.LocaleNotFoundFormat, locale));
 			}
