@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A dropdown script that can be used to make a dropdown for changing the current locale.
 - A method to query the available locales from Il8n.
 - A script that can be used to control the current locale e.g. from a UnityEvent: LocaleSetter
+- Prefabs, creatable from the GameObject menu, for Translations UI components.
 
 ### Fixed
 
