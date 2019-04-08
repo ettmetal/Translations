@@ -35,11 +35,11 @@ namespace Ettmetal.Translation {
 
 		// Core internationalisation interface.
 		public static string __(string key) {
-			string translation = activeLocale[key].Value;
+			string translation = activeLocale[key]?.Value ?? null;
 
 			if(string.IsNullOrEmpty(translation)) {
 				Debug.LogFormat(Strings.FallbackToDefaultFormat, activeLocale.Name, key);
-				translation = defaultLocale[key].Value;
+				translation = defaultLocale[key]?.Value ?? null;
 			}
 
 			if(string.IsNullOrEmpty(translation)) {
