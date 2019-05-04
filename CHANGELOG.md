@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - A method to query the available locales from Il8n.
 - A script that can be used to control the current locale e.g. from a UnityEvent: LocaleSetter
 - Prefabs, creatable from the GameObject menu, for Translations UI components.
+- ✨ New feature - Tokens.
 
 ### Fixed
 
