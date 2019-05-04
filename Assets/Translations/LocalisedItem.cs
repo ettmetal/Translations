@@ -9,8 +9,6 @@ namespace Ettmetal.Translation {
 		private string key = "";
 		public string Key { get { return key; } }
 		[SerializeField]
-		private string value = "";
-		[SerializeField]
 		private PluralForm[] plurals = null;
 		public bool HasTokens {
 			get {
