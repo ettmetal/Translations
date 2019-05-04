@@ -41,15 +41,26 @@ namespace Ettmetal.Translation {
 		}
 
 		public static string __(string key, int count) {
-			string translation = activeLocale[key].Pluralised(count);
-			if(string.IsNullOrEmpty(translation)) {
+			LocalisedItem item = activeLocale[key];
+			string translation = "";
+			try {
+				translation = item.Pluralised(count);
+			}
+			catch(InvalidOperationException) {
 				Debug.LogFormat(Strings.FallbackToDefaultFormat, activeLocale.Name, key);
-				translation = defaultLocale[key].Pluralised(count);
+				item = defaultLocale[key];
+				try {
+					translation = item.Pluralised(count);
+				}
+				catch(InvalidOperationException) {
+					Debug.LogWarningFormat(Strings.NoDefaultValueFormat, defaultLocale.Name, key);
+					return "";
+				}
 			}
-			if(string.IsNullOrEmpty(translation)) {
-				Debug.LogWarningFormat(Strings.NoDefaultValueFormat, defaultLocale.Name, key);
+			if(item.HasTokens) {
+				return Tokens.ReplaceTokens(translation);
 			}
-			return Tokens.ReplaceTokens(translation);
+			else { return translation; }
 		}
 
 		public static void ChangeLocale(string newLocale) {
