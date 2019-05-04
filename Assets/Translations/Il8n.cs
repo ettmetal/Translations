@@ -58,9 +58,14 @@ namespace Ettmetal.Translation {
 				}
 			}
 			if(item.HasTokens) {
-				return Tokens.ReplaceTokens(translation);
+				try {
+					return Tokens.ReplaceTokens(translation);
+				}
+				catch(InvalidOperationException e) {
+					Debug.LogErrorFormat("Encountered problem processing token: {0}", e.Message);
+				}
 			}
-			else { return translation; }
+			return translation;
 		}
 
 		public static void ChangeLocale(string newLocale) {
