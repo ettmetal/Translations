@@ -7,17 +7,18 @@ namespace Ettmetal.Translation {
 	public static class Il8n {
 		private static TranslationSettings settings;
 		private static LocaleData defaultLocale, activeLocale;
+		private static TokenProcesser tokens;
 		public static event Action OnLocaleChanged;
 		private static string[] availableLocales;
-
+		public static TokenProcesser Tokens { get { return tokens; } }
 		public static string[] AvailableLocales {
-			get {return availableLocales;}
+			get { return availableLocales; }
 		}
 		static Il8n() {
 			settings = Resources.Load<TranslationSettings>(Strings.SettingsPath);
 			LocaleData[] locales = Resources.LoadAll<LocaleData>(settings.LocalesResourcePath);
 			availableLocales = new string[locales.Length];
-			for(int localeIndex = 0; localeIndex < locales.Length; localeIndex++){
+			for(int localeIndex = 0; localeIndex < locales.Length; localeIndex++) {
 				availableLocales[localeIndex] = locales[localeIndex].Name;
 			}
 			if(!PlayerPrefs.HasKey(Strings.LocalePref)) {
@@ -31,22 +32,12 @@ namespace Ettmetal.Translation {
 				activeLocale = loadLocale(PlayerPrefs.GetString(Strings.LocalePref));
 			}
 			Resources.UnloadUnusedAssets();
+			tokens = new TokenProcesser();
 		}
 
 		// Core internationalisation interface.
 		public static string __(string key) {
-			string translation = activeLocale[key]?.Value ?? null;
-
-			if(string.IsNullOrEmpty(translation)) {
-				Debug.LogFormat(Strings.FallbackToDefaultFormat, activeLocale.Name, key);
-				translation = defaultLocale[key]?.Value ?? null;
-			}
-
-			if(string.IsNullOrEmpty(translation)) {
-				Debug.LogWarningFormat(Strings.NoDefaultValueFormat, defaultLocale.Name, key);
-			}
-
-			return translation;
+			return __(key, 0);
 		}
 
 		public static string __(string key, int count) {
@@ -58,7 +49,7 @@ namespace Ettmetal.Translation {
 			if(string.IsNullOrEmpty(translation)) {
 				Debug.LogWarningFormat(Strings.NoDefaultValueFormat, defaultLocale.Name, key);
 			}
-			return translation;
+			return Tokens.ReplaceTokens(translation);
 		}
 
 		public static void ChangeLocale(string newLocale) {
