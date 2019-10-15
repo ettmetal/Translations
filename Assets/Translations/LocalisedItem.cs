@@ -8,8 +8,6 @@ namespace Ettmetal.Translation {
 		[SerializeField, Tooltip("The name used to refer to this item. Must be unique.")]
 		private string key = "";
 		public string Key { get { return key; } }
-		[SerializeField]
-		private string defaultValue;
 		public string Default { get { return plurals[0].Value; } }
 		[SerializeField]
 		private Variant[] plurals;

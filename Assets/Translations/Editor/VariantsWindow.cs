@@ -28,7 +28,7 @@ namespace Ettmetal.Translation.Editor {
 					EditorGUILayout.PropertyField(item.FindPropertyRelative("end"), new GUIContent("End"));
 					SerializedProperty val = item.FindPropertyRelative("value");
 					SerializedProperty tok = item.FindPropertyRelative("hasTokens");
-					string newValue = EditorGUILayout.TextField(val.stringValue, "Value");
+					string newValue = EditorGUILayout.TextField(val.stringValue, val.stringValue);
 					val.stringValue = newValue;
 					tok.boolValue = regexr.Match(newValue).Success;
 				}

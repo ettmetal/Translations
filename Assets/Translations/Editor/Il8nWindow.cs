@@ -115,8 +115,15 @@ namespace Ettmetal.Translation.Editor {
 		}
 
 		private void editItem(SerializedProperty item) {
+			SerializedProperty items = item.FindPropertyRelative("plurals");
+			// Ensure default value is set up
+			SerializedPropertyUtilities.EnsureSerializedArrayIsSize(items, 1);
+			SerializedProperty defaultValue = items.GetArrayElementAtIndex(0);
+			defaultValue.FindPropertyRelative("start").intValue = int.MinValue;
+			defaultValue.FindPropertyRelative("end").intValue = int.MaxValue;
+			// Draw field for default value and button for providing plurals
 			EditorGUITools.DoHorizontal(() => {
-				EditorGUILayout.PropertyField(item.FindPropertyRelative("defaultValue"));
+				EditorGUILayout.PropertyField(defaultValue.FindPropertyRelative("value"));
 				if(GUILayout.Button("Plurals", GUILayout.ExpandWidth(false))) {
 					VariantsWindow.ShowFor(item.FindPropertyRelative("plurals"));
 				}
