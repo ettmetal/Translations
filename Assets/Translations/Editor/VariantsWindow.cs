@@ -18,7 +18,6 @@ namespace Ettmetal.Translation.Editor {
 		private void OnGUI(){ // Will eventually be replaced with reorderable
 			int elements = EditorGUILayout.IntField("Elements", plurals.arraySize);
 			SerializedPropertyUtilities.EnsureSerializedArrayIsSize(plurals, elements);
-			Debug.LogFormat("Elements: {0}, Size: {1}", elements, plurals.arraySize);
 			for(int i = 0; i < elements; i++) {
 				SerializedProperty item = plurals.GetArrayElementAtIndex(i);
 				item.isExpanded = EditorGUILayout.Foldout(item.isExpanded, string.Format("Element {0}", i));
