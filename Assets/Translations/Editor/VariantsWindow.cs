@@ -16,6 +16,7 @@ namespace Ettmetal.Translation.Editor {
 		}
 
 		private void OnGUI(){ // Will eventually be replaced with reorderable
+			plurals.serializedObject.UpdateIfRequiredOrScript();
 			int elements = EditorGUILayout.IntField("Elements", plurals.arraySize);
 			SerializedPropertyUtilities.EnsureSerializedArrayIsSize(plurals, elements);
 			for(int i = 0; i < elements; i++) {
@@ -27,7 +28,7 @@ namespace Ettmetal.Translation.Editor {
 					EditorGUILayout.PropertyField(item.FindPropertyRelative("end"), new GUIContent("End"));
 					SerializedProperty val = item.FindPropertyRelative("value");
 					SerializedProperty tok = item.FindPropertyRelative("hasTokens");
-					string newValue = EditorGUILayout.TextField(val.stringValue, val.stringValue);
+					string newValue = EditorGUILayout.TextField("Value", val.stringValue);
 					val.stringValue = newValue;
 					tok.boolValue = regexr.Match(newValue).Success;
 				}

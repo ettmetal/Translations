@@ -117,7 +117,7 @@ namespace Ettmetal.Translation.Editor {
 		private void editItem(SerializedProperty item) {
 			SerializedProperty items = item.FindPropertyRelative("plurals");
 			// Ensure default value is set up
-			SerializedPropertyUtilities.EnsureSerializedArrayIsSize(items, 1);
+			SerializedPropertyUtilities.EnsureSerializedArrayIsSize(items, Mathf.Max(1, items.arraySize));
 			SerializedProperty defaultValue = items.GetArrayElementAtIndex(0);
 			defaultValue.FindPropertyRelative("start").intValue = int.MinValue;
 			defaultValue.FindPropertyRelative("end").intValue = int.MaxValue;
