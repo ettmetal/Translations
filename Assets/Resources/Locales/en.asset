@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b9c0ede5a55a9c4cafee1c895550eab, type: 3}
+  m_Name: en
+  m_EditorClassIdentifier: 
+  localeName: 
+  localeCode: 
+  items:
+  - key: hello
+    plurals:
+    - start: -2147483648
+      end: 2147483647
+      value: hi
+      hasTokens: 0
+  - key: player-name
+    plurals:
+    - start: -2147483648
+      end: 2147483647
+      value: <%playername%>
+      hasTokens: 0
+  - key: doodads
+    plurals:
+    - start: -2147483648
+      end: 2147483647
+      value: You have <%doodads%> doodad.
+      hasTokens: 0
+    - start: -2147483648
+      end: 0
+      value: You have <%doodads%> doodads.
+      hasTokens: 0
+    - start: 2
+      end: 2147483647
+      value: You have <%doodads%> doodads.
+      hasTokens: 0
